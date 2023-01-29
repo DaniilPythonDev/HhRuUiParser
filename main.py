@@ -506,12 +506,13 @@ class Ui_MainWindow(object):
 
     def set_def_val(self):
         def_data = WriteReadFile(name_file=ScrapingData.file_name_default).read()
-        self.login_input.setText(def_data.get('email'))
-        self.password_input.setText(def_data.get('password'))
-        self.key_word_input.setText(def_data.get('search_text'))
-        self.area_input.setText(def_data.get('area'))
-        self.search_by_v.setCurrentIndex(int(def_data.get('search_field')))
-        self.search_time_v.setCurrentIndex(int(def_data.get('search_period')))
+        if def_data:
+            self.login_input.setText(def_data.get('email'))
+            self.password_input.setText(def_data.get('password'))
+            self.key_word_input.setText(def_data.get('search_text'))
+            self.area_input.setText(def_data.get('area'))
+            self.search_by_v.setCurrentIndex(int(def_data.get('search_field')))
+            self.search_time_v.setCurrentIndex(int(def_data.get('search_period')))
 
     async def data_validator(self, dict_data: dict):
         ScrapingData.login['email'] = dict_data.get('email')
